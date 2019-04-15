@@ -1,13 +1,16 @@
 package com.github.kostaxy.clicker
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
 
     // name settings-file
     val APP_PREFERENCES = "mysettings"
@@ -27,6 +30,24 @@ class MainActivity : AppCompatActivity() {
             count++
             tv_count.text = (count.toString())
         }
+
+        btn_reset.setOnClickListener(){
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Reset score")
+            builder.setMessage("Are you really ready to reset score?")
+                .setPositiveButton("Yes, I am cool " + ("\ud83d\ude0e"), { _, _ -> resetScore()})
+                .setNegativeButton("No no no! ", { dialog, _ -> dialog.cancel()})
+
+            val alert: AlertDialog = builder.create()
+            alert.show()
+        }
+    }
+
+
+    private fun resetScore() {
+        count = 0
+        tv_count.text = "0"
+        Toast.makeText(applicationContext, "Score was reset",Toast.LENGTH_LONG).show()
     }
 
     override fun onPause() {
