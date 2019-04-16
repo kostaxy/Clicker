@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     val APP_PREFERENCES = "mysettings"
     val APP_PREFERENCES_COUNTER = "counter"
 
+    var test = "create registration"
+
     lateinit var preferences:  SharedPreferences
 
     var count = 0;
